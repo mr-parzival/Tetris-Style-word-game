@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetris Games</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: #5d5b5b00;
+      }
+
+      #game-container {
+        width: 300px;
+        height: 600px;
+        margin: 0 auto;
+        position: relative;
+        border: 3px solid #333;
+      }
+
+      .block {
+        width: 80px;
+        height: 30px;
+        position: absolute;
+        background-color: #3498db;
+        color: white;
+        text-align: center;
+        line-height: 30px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game-container"><h1 style="background-color:rgb(12, 204, 229);">USERFACET</h1></div>
+    <script>
+      const gameContainer = document.getElementById("game-container");
+
+      // Function to create a new falling block with a random word
+      function createBlock() {
+        const words = [
+          "we",
+          "design",
+          "and", 
+          "develop",
+          "applications",
+          "that",
+          "run",
+          "the",
+          "world",
+         "showcase",
+          "future",
+        ];
+        const randomWord = words[Math.floor(Math.random(1) * words.length)];
+        const block = document.createElement("div");
+        block.classList.add("block");
+        block.style.left = `${(
+           (Math.random().clientWidth )
+        )}px`;
+        block.innerText = randomWord;
+        gameContainer.appendChild(block);
+
+        // Move the block down
+        let topPosition = 0;
+        const moveBlock = setInterval(() => {
+          topPosition += 10;
+          block.style.top = `${topPosition}px`;
+
+          // Check if the block has reached the bottom
+          if (topPosition >= gameContainer.clientHeight - 30) {
+            clearInterval(moveBlock);
+          }
+        }, 50);
+      }
+
+      // Generate falling blocks at intervals
+      setInterval(createBlock, 1000);
+    </script>
+  </body>
+</html>
